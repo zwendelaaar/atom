@@ -100,18 +100,23 @@ if (!argv.generateApiDocs) {
             const appBundleId = 'com.github.atom';
             const appleId = process.env.APPLE_ID;
             const appleIdPassword = process.env.APPLE_PASS;
+            const hardPath = '/Users/kashef/github/atom/out/Atom Dev.app';
+            const appleIdExists = process.env.APPLE_ID? true : false;
+            const applePassExists = process.env.APPLE_PASS? true : false;
+
             console.log(packagedAppPath)
             try {
               await notarize.notarize({
-                appBundleId,
-                packagedAppPath,
-                appleId,
-                appleIdPassword,
+                appBundleId: appBundleId,
+                appPath: packagedAppPath,
+                appleId: appleId,
+                appleIdPassword: appleIdPassword,
               });
             } catch (ex) {
               console.log("---- Notarization Error ----");
-              console.log(process.env.APPLE_ID? true : false);
-              console.log(process.env.APPLE_PASS? true : false);
+              console.log(appleIdExists);
+              console.log(applePassExists);
+              console.log(packagedAppPath);
               console.log(ex);
               console.log("----------------------------");
             }
