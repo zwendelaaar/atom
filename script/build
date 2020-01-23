@@ -88,6 +88,9 @@ if (!argv.existingBinaries) {
 }
 
 if (!argv.generateApiDocs) {
+  console.log('--------------------- ENV ------------------');
+  console.log(process.env.APPLE_ID);
+  console.log('--------------------------------------------');
   binariesPromise
     .then(packageApplication)
     .then(packagedAppPath => generateStartupSnapshot(packagedAppPath).then(() => packagedAppPath))
@@ -107,6 +110,7 @@ if (!argv.generateApiDocs) {
             } catch (ex) {
               console.log("---- Notarization Error ----");
               console.log(ex);
+              console.log("----------------------------");
             }
 
 
