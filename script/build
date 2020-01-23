@@ -98,11 +98,10 @@ if (!argv.generateApiDocs) {
             codeSignOnMac(packagedAppPath)
 
             const appBundleId = 'com.github.atom';
-            const appleId = process.env.APPLE_ID;
-            const appleIdPassword = process.env.APPLE_PASS;
-            const hardPath = '/Users/kashef/github/atom/out/Atom Dev.app';
-            const appleIdExists = process.env.APPLE_ID? true : false;
-            const applePassExists = process.env.APPLE_PASS? true : false;
+            const appleId = process.env.AC_USER;
+            const appleIdPassword = process.env.AC_PASSWORD;
+            const appleIdExists = appleId? true : false;
+            const applePassExists = appleIdPassword? true : false;
 
             console.log(packagedAppPath)
             try {
