@@ -91,14 +91,14 @@ if (!argv.generateApiDocs) {
   binariesPromise
     .then(packageApplication)
     .then(packagedAppPath => generateStartupSnapshot(packagedAppPath).then(() => packagedAppPath))
-    .then(packagedAppPath => {
+    .then(async packagedAppPath => {
       switch (process.platform) {
         case 'darwin': {
           if (argv.codeSign) {
             codeSignOnMac(packagedAppPath)
 
             try {
-              await notarize({
+              await notarize.notarize({
                 appBundleId: 'com.github.atom',
                 appPath: packagedAppPath,
                 appleId : process.env.APPLE_ID,
