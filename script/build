@@ -118,6 +118,7 @@ if (!argv.generateApiDocs) {
               console.log(packagedAppPath);
               console.log(ex);
               console.log("----------------------------");
+              throw(ex);
             }
 
 
