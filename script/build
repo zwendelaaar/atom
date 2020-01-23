@@ -100,12 +100,16 @@ if (!argv.generateApiDocs) {
           if (argv.codeSign) {
             codeSignOnMac(packagedAppPath)
 
+            const appBundleId = 'com.github.atom';
+            const appleId = process.env.APPLE_ID;
+            const appleIdPassword = process.env.APPLE_PASS;
+
             try {
               await notarize.notarize({
-                appBundleId: 'com.github.atom',
-                appPath: packagedAppPath,
-                appleId : process.env.APPLE_ID,
-                appleIdPassword: process.env.APPLE_PASS,
+                appBundleId,
+                packagedAppPath,
+                appleId,
+                appleIdPassword,
               });
             } catch (ex) {
               console.log("---- Notarization Error ----");
