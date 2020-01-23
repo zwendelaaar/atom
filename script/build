@@ -88,9 +88,6 @@ if (!argv.existingBinaries) {
 }
 
 if (!argv.generateApiDocs) {
-  console.log('--------------------- ENV ------------------');
-  console.log(process.env.APPLE_ID);
-  console.log('--------------------------------------------');
   binariesPromise
     .then(packageApplication)
     .then(packagedAppPath => generateStartupSnapshot(packagedAppPath).then(() => packagedAppPath))
@@ -103,7 +100,7 @@ if (!argv.generateApiDocs) {
             const appBundleId = 'com.github.atom';
             const appleId = process.env.APPLE_ID;
             const appleIdPassword = process.env.APPLE_PASS;
-
+            console.log(packagedAppPath)
             try {
               await notarize.notarize({
                 appBundleId,
@@ -113,6 +110,8 @@ if (!argv.generateApiDocs) {
               });
             } catch (ex) {
               console.log("---- Notarization Error ----");
+              console.log(process.env.APPLE_ID? true : false);
+              console.log(process.env.APPLE_PASS? true : false);
               console.log(ex);
               console.log("----------------------------");
             }
