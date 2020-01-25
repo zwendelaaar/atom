@@ -1,6 +1,6 @@
 'use strict';
 
-const electronInstaller = require('@atom/electron-winstaller');
+const electronInstaller = require('electron-winstaller');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
@@ -12,9 +12,9 @@ module.exports = packagedAppPath => {
   const updateUrlPrefix =
     process.env.ATOM_UPDATE_URL_PREFIX || 'https://atom.io';
   const options = {
-    name: 'atomnightly',
+    name: CONFIG.channelName,
     title: CONFIG.appName,
-    exe: 'atomnightly.exe',
+    exe: CONFIG.executableName,
     appDirectory: packagedAppPath,
     authors: 'GitHub Inc.',
     iconUrl: `https://raw.githubusercontent.com/atom/atom/master/resources/app-icons/${
