@@ -12,9 +12,9 @@ module.exports = packagedAppPath => {
   const updateUrlPrefix =
     process.env.ATOM_UPDATE_URL_PREFIX || 'https://atom.io';
   const options = {
-    name: CONFIG.channelName,
+    name: 'atomnightly',
     title: CONFIG.appName,
-    exe: CONFIG.executableName,
+    exe: 'atomnightly.exe',
     appDirectory: packagedAppPath,
     authors: 'GitHub Inc.',
     iconUrl: `https://raw.githubusercontent.com/atom/atom/master/resources/app-icons/${
@@ -27,7 +27,6 @@ module.exports = packagedAppPath => {
       'loading.gif'
     ),
     outputDirectory: CONFIG.buildOutputPath,
-    noDelta: true,
     noMsi: true,
     remoteReleases: `${updateUrlPrefix}/api/updates${archSuffix}?version=${
       CONFIG.computedAppVersion
