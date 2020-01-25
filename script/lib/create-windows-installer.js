@@ -56,7 +56,12 @@ module.exports = packagedAppPath => {
         console.log(
           `Deleting downloaded nupkg for previous version at ${nupkgPath} to prevent it from being stored as an artifact`
         );
-        fs.unlinkSync(nupkgPath);
+        try{
+          fs.unlinkSync(nupkgPath);
+        } catch (ex) {
+          console.error(ex)
+          console.log(nupkgPath)
+        }
       } else {
         if (process.arch === 'x64') {
           // Use the original .nupkg filename to generate the `atom-x64` name by inserting `-x64` after `atom`
