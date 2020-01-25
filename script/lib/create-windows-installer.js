@@ -27,6 +27,7 @@ module.exports = packagedAppPath => {
       'loading.gif'
     ),
     outputDirectory: CONFIG.buildOutputPath,
+    noDelta: true,
     noMsi: true,
     remoteReleases: `${updateUrlPrefix}/api/updates${archSuffix}?version=${
       CONFIG.computedAppVersion
@@ -77,7 +78,6 @@ module.exports = packagedAppPath => {
     return `${CONFIG.buildOutputPath}/${options.setupExe}`;
   };
 
-  options.name = 'atomnightly';
   console.log(`Creating Windows Installer for ${packagedAppPath}`);
   return electronInstaller
     .createWindowsInstaller(options)
