@@ -18,11 +18,15 @@ module.exports = function(filesToSign) {
 
   let certPath = process.env.ATOM_WIN_CODE_SIGNING_CERT_PATH;
   if (!certPath) {
-    certPath = path.join(os.tmpdir(), 'win.p12');
-    downloadFileFromGithub(
-      process.env.ATOM_WIN_CODE_SIGNING_CERT_DOWNLOAD_URL,
-      certPath
-    );
+    try {
+      certPath = path.join(os.tmpdir(), 'win.p12');
+      downloadFileFromGithub(
+        process.env.ATOM_WIN_CODE_SIGNING_CERT_DOWNLOAD_URL,
+        certPath
+      );
+    } catch (ex) {
+      console.error(ex);
+    }
   }
   try {
     for (const fileToSign of filesToSign) {
