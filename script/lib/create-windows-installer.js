@@ -81,6 +81,12 @@ module.exports = packagedAppPath => {
   return electronInstaller
     .createWindowsInstaller(options)
     .then(cleanUp, error => {
+      console.log(options);
+      if (error) {
+        console.log('----------------------');
+        console.log(error);
+        console.log('----------------------');
+      }
       cleanUp();
       return Promise.reject(error);
     });
