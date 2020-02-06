@@ -9,7 +9,7 @@ jobs:
       IsReleaseBranch: $[ dependencies.GetReleaseVersion.outputs['Version.IsReleaseBranch'] ]
       IsSignedZipBranch: $[ dependencies.GetReleaseVersion.outputs['Version.IsSignedZipBranch'] ]
     pool:
-      vmImage: macos-10.13
+      vmImage: macos-10.14
 
     steps:
       - task: NodeTool@0
@@ -49,7 +49,7 @@ jobs:
           if [ $IS_RELEASE_BRANCH == "true" ] || [ $IS_SIGNED_ZIP_BRANCH == "true" ]; then
             script/build --no-bootstrap --code-sign --compress-artifacts
           else
-            script/build --no-bootstrap --compress-artifacts
+            script/build --no-bootstrap --code-sign --compress-artifacts
           fi
         displayName: Build Atom
         env:
@@ -97,7 +97,7 @@ jobs:
     dependsOn: macOS_build
     timeoutInMinutes: 180
     pool:
-      vmImage: macos-10.13
+      vmImage: macos-10.14
     strategy:
       maxParallel: 3
       matrix:
