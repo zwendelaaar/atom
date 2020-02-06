@@ -42,9 +42,6 @@ jobs:
           targetfolder: '**/node_modules, !**/node_modules/**/node_modules'
           vstsFeed: 'bae1bc26-220d-43c7-a955-4de039370de2'
 
-      - script: script/lint
-        displayName: Run linter
-
       - script: |
           if [ $IS_RELEASE_BRANCH == "true" ] || [ $IS_SIGNED_ZIP_BRANCH == "true" ]; then
             script/build --no-bootstrap --code-sign --compress-artifacts

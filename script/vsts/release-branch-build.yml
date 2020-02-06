@@ -18,7 +18,6 @@ jobs:
   # Import OS-specific build definitions.
   - template: platforms/windows.yml
   - template: platforms/macos.yml
-  - template: platforms/linux.yml
 
   - job: UploadArtifacts
     pool:
