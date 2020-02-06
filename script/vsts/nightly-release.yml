@@ -21,7 +21,6 @@ jobs:
     dependsOn:
       - GetReleaseVersion
       - Windows
-      - Linux
       - macOS_tests
 
     variables:
