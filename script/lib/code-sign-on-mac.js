@@ -133,6 +133,7 @@ module.exports = function(packagedAppPath) {
         '--deep',
         '--force',
         '--verbose',
+        '--timestamp',
         '--entitlements',
         macEntitlementsPath,
         '--options',
