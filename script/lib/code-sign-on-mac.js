@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const os = require('os');
 const path = require('path');
 const spawnSync = require('./spawn-sync');
+const osxSign = require('electron-osx-sign');
 const macEntitlementsPath = path.join(
   CONFIG.repositoryRootPath,
   'resources',
@@ -127,6 +128,24 @@ module.exports = function(packagedAppPath) {
     }
 
     console.log(`Code-signing application at ${packagedAppPath}`);
+
+    osxSign.sign({
+      app: packagedAppPath,
+      entitlements: macEntitlementsPath,
+      identity: 'Developer ID Application: GitHub',
+      keychain: process.env.ATOM_MAC_CODE_SIGNING_KEYCHAIN,
+      platform: 'darwin',
+      hardenedRuntime: true
+    }, function done (err) {
+      if (err) {
+        console.error("Applicaiton singing failed");
+        console.error(err);
+        return;
+      }
+      console.info("Application signing complete")
+    })
+
+    /*
     spawnSync(
       'codesign',
       [
@@ -145,6 +164,7 @@ module.exports = function(packagedAppPath) {
       ],
       { stdio: 'inherit' }
     );
+    */
   } finally {
     if (!process.env.ATOM_MAC_CODE_SIGNING_CERT_PATH) {
       console.log(`Deleting certificate at ${certPath}`);
