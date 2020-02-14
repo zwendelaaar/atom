@@ -129,21 +129,25 @@ module.exports = function(packagedAppPath) {
 
     console.log(`Code-signing application at ${packagedAppPath}`);
 
-    osxSign.sign({
-      app: packagedAppPath,
-      entitlements: macEntitlementsPath,
-      identity: 'Developer ID Application: GitHub',
-      keychain: process.env.ATOM_MAC_CODE_SIGNING_KEYCHAIN,
-      platform: 'darwin',
-      hardenedRuntime: true
-    }, function done (err) {
-      if (err) {
-        console.error("Applicaiton singing failed");
-        console.error(err);
-        return;
+    osxSign.sign(
+      {
+        app: packagedAppPath,
+        entitlements: macEntitlementsPath,
+        identity: 'Developer ID Application: GitHub',
+        keychain: process.env.ATOM_MAC_CODE_SIGNING_KEYCHAIN,
+        platform: 'darwin',
+        hardenedRuntime: true
+      },
+
+      function done(err) {
+        if (err) {
+          console.error('Applicaiton singing failed');
+          console.error(err);
+          return;
+        }
+        console.info('Application signing complete');
       }
-      console.info("Application signing complete")
-    })
+    );
 
     /*
     spawnSync(
